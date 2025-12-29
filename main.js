@@ -1,8 +1,7 @@
 && เเละ
 || หรือ 
 ! not
-*/
-ึlet nunber1 = 5;
+let nunber1 = 5;
 let number2 10;
 //true && true = true
 let  condition1 = (nunber1 >= 3 || number2 >= 10);
