@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html>
-  <meta charset="utf-8">
-  <meta name="viewport " content="width=device-width, initiat-scsle="
-  <title>Document</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSDOM Example</title>       
+</head>
+/*
+selectDOM
+document.getElementById
+document.getElementsByName
+document.getElementsByTagName
+document.querySelector
+/*
+<body>
+    <button onclick="userClicked()">Click !!</button>
+    <div onclick="divClicked()"> คลิก <Div>/div>
+    <script>
+        function userClicked() {
+            console.log("User Clicked the Button");
+        }
+        function divClicked() {
+            console.log("Div Clicked the div");
+        }
+    </script>
+<body>
+<input type="radio" name="gender" value="male"onchange="changeGender()"checked="true"> male
+<input type="radio" name="gender" value="female" onchange="changeGender()"> female
+<script >
+    function changeGender() {
+        let genderInput = document.getElementsByName('gender');  
+       // เลือก gender ทุก input ออกมา
+
+        let genderInputs = document.querySelectorAll('input[name="gender"]');
+       // ใคร checked อยู่ เพศโดนเลือกอยู่
+        for (let i = 0; i < genderInputs.length; i++) {
+            if (genderInputs[i].checked) {
+                console.log("Gender selected: " + genderInputs[i].value);
+            }
+        }
+    }
+    
+    </script>
+</body>
 </html>
-<body
-     <script src="main.js"></script>
-     </body>
-     </html>
+//*
+งานอดิเรก:
+<input type="checkbox" name="hobby" value="reading" > Reading
+<input type="checkbox" name="hobby" value="traveling" > Traveling
+<input type="checkbox" name="hobby" value="gaming" > Gaming
+    <script>
+        let checkboxesinputs = document.querySelectorAll('input[name="hobby"]');
+        for (let i = 0; i < checkboxesinputs.length; i++) {
+            console.log(checkboxesinputs[i].value);
+        }
+    </script>
+</body>
+</html>
