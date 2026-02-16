@@ -1,17 +1,64 @@
-// ทำการ import http module เพื่อสร้าง Server
-const http = require('http');
-const host = 'Incalhost';
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 const port = 8000;
 
-//  กำหนดค่าเริ่มต้นของ Server เมื่อเปิดใช้งาน
+app.use(bodyParser.json()); 
 
-const requestListener = function(req,res) {
-    res.writeHead(200);
-    res.end('My Frist Server!');
-}
+let users = [];
+let counter = 1;
 
-//run server;
-const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-    console.log(`Server is runner on http://${hort}:${port}`);
-    });
+// path = /test
+app.get('/test', (req, res) => {
+  let user = {
+    name: 'John Doe',
+    age: 30,
+    email: 'john.doe@example.com'
+  };
+  res.json(user);
+});
+
+// path = POST /user
+app.post('/user', (req, res) => {
+  let user = req.body;
+  user.id = counter++; // 
+  users.push(user);
+
+  res.json({
+    message: 'User added successfully',
+    user: user
+  });
+});
+
+// path = PUT /user/:id
+app.patch('/user/:id', (req, res) => {
+  const id = req.params.id; 
+  const updateUser = req.body; 
+
+  // หา user ที่มี id ตรงกับ id ที่ส่งมา
+  let selectedIndex = users.findIndex(user => user.id == id);
+
+  if (updateUser.name) {
+    users[selectedIndex].name = updateUser.name;
+  }
+  if (updateUser.age) {
+    users[selectedIndex].age = updateUser.age;
+  }
+
+  // อัปเดต user ที่เจอ
+  users[selectedIndex].name = updateUser.name || users[selectedIndex].name;
+  users[selectedIndex].age = updateUser.age || users[selectedIndex].age;  
+
+
+  res.json({
+    message: 'User updated successfully',
+    data: {
+      user: users[selectedIndex],
+      indexUpdated: selectedIndex
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
